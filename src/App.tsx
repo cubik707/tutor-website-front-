@@ -1,11 +1,18 @@
 // import {Login} from "./components/Login/Login.tsx";
-import {Registration} from "./components/Registration/Registration.tsx";
+
+
+// import {MainPage} from "./pages/Main/MainPage.tsx";
+import {Header} from "./pages/Header/Header.tsx";
+import {MainPage} from "./pages/Main/MainPage.tsx";
 
 function App() {
   return (
       <>
-        {/*<Login/>*/}
-          <Registration />
+          <Header/>
+          <MainPage/>
+
+        {/*/!*<Login/>*!/*/}
+        {/*  <Registration />*/}
       </>
   )
 
