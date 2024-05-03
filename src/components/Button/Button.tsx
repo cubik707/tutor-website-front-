@@ -30,6 +30,7 @@ const ButtonStyled = styled.button<StyledButtonPropsType>`
     &:hover{
         background-color: ${theme.colors.btnHover};
         transition: 0.2s;
+        
     }
     
 `

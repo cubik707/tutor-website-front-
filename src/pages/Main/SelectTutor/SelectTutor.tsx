@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {Container} from "../../components/Container/Container.ts";
-import SelectTutorImg from "../../assets/SelectTutor-img.png";
+import {Container} from "../../../components/Container/Container.ts";
+import SelectTutorImg from "../../../assets/SelectTutor-img.png";
 import {SelectOption} from "./SelectOption.tsx";
 
 

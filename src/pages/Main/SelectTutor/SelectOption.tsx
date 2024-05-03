@@ -2,8 +2,8 @@
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useState} from "react";
 import styled from "styled-components";
-import {FlexWrapper} from "../../components/FlexWrapper/FlexWrapper.tsx";
-import {Button} from "../../components/Button/Button.tsx";
+import {FlexWrapper} from "../../../components/FlexWrapper/FlexWrapper.tsx";
+import {Button} from "../../../components/Button/Button.tsx";
 
 
 export const SelectOption = () => {
