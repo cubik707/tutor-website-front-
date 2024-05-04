@@ -29,7 +29,7 @@ const StyledHeader = styled.header`
     border-bottom: 1px solid rgb(108, 108, 114);
 `
 
-const Logo = styled.span`
+const Logo = styled.a`
     color: ${theme.colors.fontBlack};
     font-size: 36px;
     font-weight: 700;
