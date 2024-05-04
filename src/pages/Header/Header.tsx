@@ -26,7 +26,7 @@ const StyledHeader = styled.header`
     right: 0;
     left: 0;
     z-index: 9999;
-    border: 2px solid blue;
+    border-bottom: 1px solid rgb(108, 108, 114);
 `
 
 const Logo = styled.span`
