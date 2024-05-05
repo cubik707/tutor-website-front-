@@ -8,8 +8,10 @@ type TutorInfoPropsType = {
     pricePerHour: number
     experience: string
     reviewsCount: number
+    btnTitle: string
+    onClickHandler: () => void
 };
-export const TutorInfo = ({rating, reviewsCount, experience, pricePerHour}: TutorInfoPropsType) => {
+export const TutorInfo = ({rating, reviewsCount, experience, pricePerHour, btnTitle, onClickHandler}: TutorInfoPropsType) => {
     return (
         <TutorInfoStyled>
             <FlexWrapper direction={"column"} gap={"10px"} margin={"0 0 30px 0"}>
@@ -33,8 +35,7 @@ export const TutorInfo = ({rating, reviewsCount, experience, pricePerHour}: Tuto
                 </Text>
             </FlexWrapper>
             <FlexWrapper>
-                <Button width={"389px"} height={"50px"} title={"Перейти к профилю"} onClick={() => {
-                }}/>
+                <Button width={"389px"} height={"50px"} title={btnTitle} onClick={onClickHandler}/>
             </FlexWrapper>
         </TutorInfoStyled>
     );

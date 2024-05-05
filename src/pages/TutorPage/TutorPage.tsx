@@ -1,8 +1,9 @@
-import {SelectTutor} from "./SelectTutor/SelectTutor.tsx";
-import {ConvenientService} from "./ConvenientService/ConvenientService.tsx";
-import {ReviewAboutTutor} from "../../components/ReviewAboutTutor/ReviewAboutTutor.tsx";
-import {WhyTutor} from "./WhyTutor/WhyTutor.tsx";
+import styled from "styled-components";
+import {theme} from "../../styles/Theme.ts";
+import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
+import {Container} from "../../components/Container/Container.ts";
 import {Review} from "../../components/Review/Review.tsx";
+import {TutorInfoBlock} from "./TutorInfoBlock.tsx";
 
 const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
@@ -10,13 +11,23 @@ const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
 ];
-export const MainPage = () => {
+
+export const TutorPage = () => {
+
     return (
         <>
-            <SelectTutor/>
-            <ConvenientService/>
-            <ReviewAboutTutor reviewItems={reviewItems} title={"Отзывы о репетиторах"}/>
-            <WhyTutor/>
+            <TitleBlock>
+                <Container>
+                    <SectionTitle color={"white"}>Лучшие профессиональные репетиторы на tutor.school</SectionTitle>
+                </Container>
+            </TitleBlock>
+            <TutorInfoBlock reviewItems={reviewItems}/>
         </>
     );
 };
+
+const TitleBlock = styled.div`
+    padding: 175px 0 65px 0;
+    background-color: ${theme.colors.fontBlack};
+`
+

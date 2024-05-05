@@ -75,9 +75,16 @@ function Content() {
             {tutorsToShow.map((tutor, index) => (
                 <React.Fragment key={index}>
                     <FlexWrapper gap={"22px"} margin={"0 0 22px 0"}>
-                        <TutorCard tutorName={tutor.tutorName} subject={tutor.subjects}
-                                   qualification={tutor.qualification} description={tutor.description}/>
-                        <TutorInfo rating={tutor.rating} experience={tutor.experience} pricePerHour={tutor.pricePerHour}
+                        <TutorCard tutorName={tutor.tutorName}
+                                   subject={tutor.subjects}
+                                   qualification={tutor.qualification}
+                                   description={tutor.description}/>
+
+                        <TutorInfo btnTitle={"Перейти к профилю"}
+                                   onClickHandler={()=>{}}
+                                   rating={tutor.rating}
+                                   experience={tutor.experience}
+                                   pricePerHour={tutor.pricePerHour}
                                    reviewsCount={tutor.reviewsCount}/>
                     </FlexWrapper>
                 </React.Fragment>
