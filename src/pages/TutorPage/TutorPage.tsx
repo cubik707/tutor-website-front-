@@ -5,6 +5,7 @@ import {Container} from "../../components/Container/Container.ts";
 import {Review} from "../../components/Review/Review.tsx";
 import {TutorInfoBlock} from "./TutorInfoBlock.tsx";
 import {ReviewForm} from "./ReviewForm.tsx";
+import {Routes, Route} from "react-router-dom";
 
 const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
@@ -22,8 +23,10 @@ export const TutorPage = () => {
                     <SectionTitle color={"white"}>Лучшие профессиональные репетиторы на tutor.school</SectionTitle>
                 </Container>
             </TitleBlock>
-            {/*<TutorInfoBlock reviewItems={reviewItems}/>*/}
-            <ReviewForm/>
+            <Routes>
+                <Route path={"/tutors/:id/info"} element={<TutorInfoBlock reviewItems={reviewItems}/>} />
+                <Route path={"/reviews/create"} element={<ReviewForm/>} />
+            </Routes>
         </>
     );
 };

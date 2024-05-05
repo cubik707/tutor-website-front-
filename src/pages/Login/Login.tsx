@@ -20,7 +20,7 @@ export const Login = () => {
 const LoginStyled = styled.div`
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25), 4px 0 10px 0 rgba(0, 0, 0, 0.25);
     background: rgb(255, 255, 255);
-    padding: 50px;
+    padding:  50px;
     max-width: 400px;
     width: 100%;
     display: flex;
@@ -33,4 +33,5 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 175px 0 65px 0;
 `

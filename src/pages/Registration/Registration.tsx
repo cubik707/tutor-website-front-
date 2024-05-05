@@ -27,10 +27,11 @@ export const Registration = () => {
 };
 
 const Wrapper = styled.div`
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+
+    padding: 175px 0 65px 0;
 `
 
 const RegistrationStyled = styled.div`

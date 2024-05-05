@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import {theme} from "../../../styles/Theme.ts";
+import {Link} from "react-router-dom"
+
+type MenuItem = {
+    label: string;
+    path: string;
+};
 
 type HeaderMenuPropsType = {
-    menuItems: Array<string>
+    menuItems: Array<MenuItem>;
 };
 export const HeaderMenu = ({menuItems}: HeaderMenuPropsType) => {
     return (
@@ -10,9 +16,7 @@ export const HeaderMenu = ({menuItems}: HeaderMenuPropsType) => {
             <ul>
                 {menuItems.map((item, index)=>{
                     return <li key={index}>
-                        <Link href ="">
-                            {item}
-                        </Link>
+                        <LinkStyled to={item.path}>{item.label}</LinkStyled>
                     </li>
                 })}
             </ul>
@@ -31,7 +35,7 @@ const StyledHeaderMenu = styled.nav`
     text-transform: uppercase;
 `
 
-const Link = styled.a`
+const LinkStyled = styled(Link)`
     font-size: 14px;
     font-weight: 700;
     &:hover{

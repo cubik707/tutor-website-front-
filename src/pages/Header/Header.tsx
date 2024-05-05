@@ -3,15 +3,21 @@ import {theme} from "../../styles/Theme.ts";
 import {FlexWrapper} from "../../components/FlexWrapper/FlexWrapper.tsx";
 import {Container} from "../../components/Container/Container.ts";
 import {HeaderMenu} from "./headerMenu/HeaderMenu.tsx";
+import {Link} from "react-router-dom";
 
-const items = ["Репетиторы", "Страть репетитором", "Вход", "Регистрация"]
+const items = [
+    { label: "Репетиторы", path: "/tutors" },
+    { label: "Стать репетитором", path: "/become-tutor" },
+    { label: "Вход", path: "/login" },
+    { label: "Регистрация", path: "/register" }
+];
 
 export const Header = () => {
     return (
         <StyledHeader>
             <Container>
                 <FlexWrapper justify={"space-between"}>
-                    <Logo>tutor</Logo>
+                    <Logo to={"/#"}>tutor</Logo>
                     <HeaderMenu menuItems={items}/>
                 </FlexWrapper>
             </Container>
@@ -30,7 +36,7 @@ const StyledHeader = styled.header`
     padding: 30px 0;
 `
 
-const Logo = styled.a`
+const Logo = styled(Link)`
     color: ${theme.colors.fontBlack};
     font-size: 36px;
     font-weight: 700;
