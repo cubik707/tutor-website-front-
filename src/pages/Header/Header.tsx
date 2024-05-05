@@ -4,7 +4,7 @@ import {FlexWrapper} from "../../components/FlexWrapper/FlexWrapper.tsx";
 import {Container} from "../../components/Container/Container.ts";
 import {HeaderMenu} from "./headerMenu/HeaderMenu.tsx";
 
-const items = ["Репетиторы", "Страть репетитором", "Вход"]
+const items = ["Репетиторы", "Страть репетитором", "Вход", "Регистрация"]
 
 export const Header = () => {
     return (

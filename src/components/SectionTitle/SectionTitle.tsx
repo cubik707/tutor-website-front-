@@ -4,6 +4,7 @@ import {theme} from "../../styles/Theme.ts";
 type SectionTitlePropsType = {
     margin?: string
     color?: "black" | "white"
+    textAlign?: string
 }
 
 export const SectionTitle = styled.h2<SectionTitlePropsType>`
@@ -12,4 +13,5 @@ export const SectionTitle = styled.h2<SectionTitlePropsType>`
     line-height: 42px;
     color: ${props => props.color === "white" ? theme.colors.fontWhite : theme.colors.fontBlack || theme.colors.fontBlack};
     margin: ${props => props.margin || "0"};
+    text-align: ${props => props.textAlign || "none"};
 `
