@@ -65,7 +65,7 @@ export const SelectOption = () => {
                     </Select>
                 </FormControl>
                 <FormControl sx={{ m: 0, minWidth: 170 }}>
-                    <InputLabel id="choose-offline-label">Оффлайн</InputLabel>
+                    <InputLabel id="choose-offline-label">Формат обучения</InputLabel>
                     <Select
                         labelId="choose-offline-label"
                         id="choose-offline"

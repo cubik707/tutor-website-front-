@@ -3,12 +3,13 @@ import {theme} from "../../styles/Theme.ts";
 
 type SectionTitlePropsType = {
     margin?: string
+    color?: "black" | "white"
 }
 
 export const SectionTitle = styled.h2<SectionTitlePropsType>`
     font-size: 36px;
     font-weight: 800;
     line-height: 42px;
-    color: ${theme.colors.fontBlack};
+    color: ${props => props.color === "white" ? theme.colors.fontWhite : theme.colors.fontBlack || theme.colors.fontBlack};
     margin: ${props => props.margin || "0"};
 `

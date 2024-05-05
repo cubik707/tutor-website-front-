@@ -27,6 +27,7 @@ const StyledHeader = styled.header`
     left: 0;
     z-index: 9999;
     border-bottom: 1px solid rgb(108, 108, 114);
+    padding: 30px 0;
 `
 
 const Logo = styled.a`
