@@ -4,6 +4,7 @@ import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {Container} from "../../components/Container/Container.ts";
 import {Review} from "../../components/Review/Review.tsx";
 import {TutorInfoBlock} from "./TutorInfoBlock.tsx";
+import {ReviewForm} from "./ReviewForm.tsx";
 
 const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
@@ -21,7 +22,8 @@ export const TutorPage = () => {
                     <SectionTitle color={"white"}>Лучшие профессиональные репетиторы на tutor.school</SectionTitle>
                 </Container>
             </TitleBlock>
-            <TutorInfoBlock reviewItems={reviewItems}/>
+            {/*<TutorInfoBlock reviewItems={reviewItems}/>*/}
+            <ReviewForm/>
         </>
     );
 };
