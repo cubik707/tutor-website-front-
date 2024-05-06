@@ -64,7 +64,7 @@ export const SelectOption = () => {
                         <MenuItem value={'Гродно'}>Гродно</MenuItem>
                     </Select>
                 </FormControl>
-                <FormControl sx={{ m: 0, minWidth: 170 }}>
+                <FormControl sx={{ m: 0, minWidth: 230 }}>
                     <InputLabel id="choose-offline-label">Формат обучения</InputLabel>
                     <Select
                         labelId="choose-offline-label"

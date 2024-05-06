@@ -6,6 +6,9 @@ import {Review} from "../../components/Review/Review.tsx";
 import {useEffect} from "react";
 
 import axios from '../../axios.ts'
+import {useDispatch} from "react-redux";
+import {fetchReviews} from "../../redux/slices/review.ts";
+import {AppDispatch} from "../../redux/store.ts";
 
 const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
@@ -14,8 +17,9 @@ const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
 ];
 export const MainPage = () => {
+    const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
-        axios.get('/reviews');
+        dispatch(fetchReviews());
     }, [])
     return (
         <>
