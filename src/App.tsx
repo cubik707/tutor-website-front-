@@ -7,8 +7,17 @@ import {Login} from "./pages/Login/Login.tsx";
 import {Registration} from "./pages/Registration/Registration.tsx";
 
 import {Routes, Route} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.ts";
 
 function App() {
+    const dispatch = useDispatch();
+    const isAuth = useSelector(selectIsAuth);
+
+    useEffect(() => {
+        dispatch(fetchAuthMe());
+    }, []);
   return (
       <>
           <Header/>
