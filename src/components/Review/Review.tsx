@@ -3,28 +3,32 @@ import {FlexWrapper} from "../FlexWrapper/FlexWrapper.tsx";
 import {theme} from "../../styles/Theme.ts";
 import {Avatar, Rating} from "@mui/material";
 
+type UserType = {
+    avatarUrl: string
+    fullName: string
+}
+
 type ReviewPropsType = {
-    rating: number,
+    rating: number
     tutorName: string
-    userName: string
+    user: UserType
     comment?: string
 }
 
 
-export const Review = ({rating, comment, userName, tutorName}:ReviewPropsType) => {
-
+export const Review = ({rating, comment, user, tutorName}:ReviewPropsType) => {
     return (
         <ReviewStyled>
             <FlexWrapper gap={"35px"}>
                 <FlexWrapper align={"center"} direction={"column"} gap={"33px"}>
-                    <Avatar sx={{width:115, height: 115}}></Avatar>
+                    <Avatar src={user.avatarUrl} sx={{width:115, height: 115}}></Avatar>
                     <Rating name="read-only" value={rating} readOnly/>
                 </FlexWrapper>
                 <FlexWrapper direction={"column"} justify={"space-between"}>
                     <TutorName>Репетитор: {tutorName}</TutorName>
                     <FlexWrapper gap={"5px"} direction={"column"}>
                         <Comment>{comment}</Comment>
-                        <UserName>{userName}</UserName>
+                        <UserName>{user.fullName}</UserName>
                     </FlexWrapper>
                 </FlexWrapper>
             </FlexWrapper>

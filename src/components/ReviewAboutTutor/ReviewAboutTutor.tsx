@@ -13,20 +13,25 @@ const responsive = {
 type ReviewAboutTutorPropsType = {
     reviewItems: Array<ReactNode>
     title: string
+    status: 'loading' | 'loaded' | 'error';
 }
 
-export const ReviewAboutTutor = ({reviewItems, title}:ReviewAboutTutorPropsType) => {
+export const ReviewAboutTutor = ({reviewItems, title, status}:ReviewAboutTutorPropsType) => {
+
     return (
         <ReviewAboutTutorStyled>
             <Container>
                 <SectionTitle margin={" 0 897px 48px 0"}>
                     {title}
                 </SectionTitle>
-                <AliceCarousel
+                {status === 'loaded' ? (<AliceCarousel
                     mouseTracking
                     items={reviewItems}
                     responsive={responsive}
-                />
+                />) : (
+                    <div>Загрузка отзывов....</div>
+                )}
+
             </Container>
         </ReviewAboutTutorStyled>
     );

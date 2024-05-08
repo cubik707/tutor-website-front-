@@ -1,10 +1,15 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {reviewsReducer} from "./slices/review.ts";
 
+const rootReducer = combineReducers({
+        reviews: reviewsReducer,
+
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+
 const store = configureStore({
-        reducer: {
-                reviews: reviewsReducer
-        }
+        reducer: rootReducer,
 });
 
 export default store;
