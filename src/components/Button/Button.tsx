@@ -6,11 +6,12 @@ type ButtonPropsType = {
     onClick?:() => void
     width?: string
     height?: string
+    type?: "button" | "submit" | "reset" | undefined
 }
 
-export const Button = ({title, onClick, width, height}: ButtonPropsType) => {
+export const Button = ({title, onClick, width, height, type}: ButtonPropsType) => {
     return (
-        <ButtonStyled height={height} width={width} onClick={onClick}>{title}</ButtonStyled>
+        <ButtonStyled type={type} height={height} width={width} onClick={onClick}>{title}</ButtonStyled>
     )
 }
 

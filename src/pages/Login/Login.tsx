@@ -2,15 +2,59 @@ import styled from "styled-components";
 import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {TextField} from "@mui/material";
 import {Button} from "../../components/Button/Button.tsx";
+import {useForm} from "react-hook-form";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/store.ts";
+import {fetchAuth} from "../../redux/slices/auth.ts";
+
+type LoginType = {
+    email: string,
+    password: string
+}
 
 export const Login = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    const {
+        register,
+        handleSubmit,
+        setError ,
+        formState: {
+            errors,
+            isValid,
+        },
+    } = useForm({
+        defaultValues: {
+            email: 'test@test.ru',
+            password: '123'
+        },
+        mode: 'onChange',
+    });
+
+    const onSubmit = (values: LoginType) => {
+      dispatch(fetchAuth(values));
+    };
+
     return (
         <Wrapper>
             <LoginStyled>
                 <SectionTitle textAlign={"center"}>Вход в аккаунт</SectionTitle>
-                <TextField label="E-Mail" fullWidth />
-                <TextField label="Пароль" fullWidth />
-                <Button width={"100%"} title={"Войти"} onClick={()=> {}}/>
+                <StyledForm onSubmit={handleSubmit(onSubmit)}>
+                    <TextField
+                        label="E-Mail"
+                        error={Boolean(errors.email?.message)}
+                        helperText={errors.email?.message}
+                        {...register('email', {required: 'Укажите почту'})}
+                        type="email"
+                        fullWidth />
+                    <TextField
+                        label="Пароль"
+                        error={Boolean(errors.password?.message)}
+                        helperText={errors.password?.message}
+                        {...register('password', {required: 'Укажите пароль'})}
+                        fullWidth />
+                    <Button type={"submit"} width={"100%"} title={"Войти"} onClick={()=> {}}/>
+                </StyledForm>
             </LoginStyled>
         </Wrapper>
 
@@ -34,4 +78,10 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 175px 0 65px 0;
+`
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 `
