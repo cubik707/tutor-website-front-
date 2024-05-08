@@ -7,8 +7,19 @@ type LoginType = {
     password: string
 }
 
+type RegisterType = {
+    fullName: string,
+    email: string,
+    password: string
+}
+
 export const fetchAuth = createAsyncThunk('auth/fetchAuth', async (params: LoginType) => {
     const { data } = await axios.post('/auth/login', params);
+    return data;
+});
+
+export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (params: RegisterType) => {
+    const { data } = await axios.post('/auth/register', params);
     return data;
 });
 
@@ -53,6 +64,18 @@ const authSlice = createSlice({
                 state.status = 'loaded';
             })
             .addCase(fetchAuthMe.rejected, (state) => {
+                state.data = null;
+                state.status = 'error';
+            })
+            .addCase(fetchRegister.pending, (state) => {
+                state.data = null;
+                state.status = 'loading';
+            })
+            .addCase(fetchRegister.fulfilled, (state, action) => {
+                state.data = action.payload;
+                state.status = 'loaded';
+            })
+            .addCase(fetchRegister.rejected, (state) => {
                 state.data = null;
                 state.status = 'error';
             })

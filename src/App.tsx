@@ -11,6 +11,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.ts";
 
+
+
 function App() {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);

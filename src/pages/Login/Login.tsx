@@ -19,15 +19,14 @@ export const Login = () => {
     const {
         register,
         handleSubmit,
-        setError ,
         formState: {
             errors,
-            isValid,
+            // isValid,
         },
     } = useForm({
         defaultValues: {
-            email: 'test@test.ru',
-            password: '123'
+            email: '',
+            password: ''
         },
         mode: 'onChange',
     });
@@ -64,6 +63,7 @@ export const Login = () => {
                         error={Boolean(errors.password?.message)}
                         helperText={errors.password?.message}
                         {...register('password', {required: 'Укажите пароль'})}
+                        type="password"
                         fullWidth />
                     <Button type={"submit"} width={"100%"} title={"Войти"} onClick={()=> {}}/>
                 </StyledForm>
