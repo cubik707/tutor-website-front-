@@ -3,9 +3,10 @@ import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {TextField} from "@mui/material";
 import {Button} from "../../components/Button/Button.tsx";
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/store.ts";
-import {fetchAuth} from "../../redux/slices/auth.ts";
+import {fetchAuth, selectIsAuth} from "../../redux/slices/auth.ts";
+import {Navigate} from "react-router-dom";
 
 type LoginType = {
     email: string,
@@ -14,7 +15,7 @@ type LoginType = {
 
 export const Login = () => {
     const dispatch = useDispatch<AppDispatch>();
-
+    const isAuth = useSelector(selectIsAuth)
     const {
         register,
         handleSubmit,
@@ -34,6 +35,11 @@ export const Login = () => {
     const onSubmit = (values: LoginType) => {
       dispatch(fetchAuth(values));
     };
+
+    if(isAuth){
+        alert("Вы успешно авторизировались!");
+        return <Navigate to={'/'}/>
+    }
 
     return (
         <Wrapper>
