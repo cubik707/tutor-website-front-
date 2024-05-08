@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {reviewsReducer} from "./slices/review.ts";
+import {authReducer} from "./slices/auth.ts";
 
 const rootReducer = combineReducers({
         reviews: reviewsReducer,
-
+        auth: authReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
