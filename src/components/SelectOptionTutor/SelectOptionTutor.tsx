@@ -44,6 +44,11 @@ export const SelectOptionTutor = () => {
                         <MenuItem value={'Математика'}>Математика</MenuItem>
                         <MenuItem value={'Физика'}>Физика</MenuItem>
                         <MenuItem value={'История'}>История</MenuItem>
+                        <MenuItem value={'История'}>Биология</MenuItem>
+                        <MenuItem value={'История'}>Химия</MenuItem>
+                        <MenuItem value={'История'}>Русский язык</MenuItem>
+                        <MenuItem value={'История'}>Белорусский язык</MenuItem>
+                        <MenuItem value={'История'}>Обществоведение</MenuItem>
                     </Select>
                 </FormControl>
                 <FormControl sx={{ m: 0, minWidth: 330 }}>

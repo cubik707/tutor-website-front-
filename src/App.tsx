@@ -9,18 +9,27 @@ import {Registration} from "./pages/Registration/Registration.tsx";
 import {Routes, Route} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.ts";
+import {fetchAuthMe} from "./redux/slices/auth.ts";
 import {PersonalAccount} from "./pages/PersonalAccount/PersonalAccount.tsx";
+import {fetchTutors} from "./redux/slices/tutor.tsx";
+import {RootState} from "./redux/store.ts";
+import {BecomeTutor} from "./pages/BecomeTutor/BecomeTutor.tsx";
 
 
 
 function App() {
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectIsAuth);
+
 
     useEffect(() => {
+        // @ts-expect-error: Fetching initial data on component mount
         dispatch(fetchAuthMe());
+        // @ts-expect-error: Fetching initial data on component mount
+        dispatch(fetchTutors());
     }, []);
+
+
+    const { items: tutorData, status } = useSelector((state: RootState) => state.tutor);
   return (
       <>
           <Header/>
@@ -28,8 +37,9 @@ function App() {
               <Route path={"/"} element={<MainPage/>}/>
               <Route path={"/login"} element={<Login/>}/>
               <Route path={"/register"} element={ <Registration/>}/>
-              <Route path={"/tutors/:page"} element={<ChooseTutor/>}/>
-              <Route path={`/tutors/:_id`} element={<TutorPage/>}/>
+              <Route path={"/tutors/:page"} element={<ChooseTutor tutorItems={tutorData} status={status}/>}/>
+              <Route path={'/tutors/:_id'} element={<TutorPage/>}/>
+              <Route path={'/tutors/create'} element={<BecomeTutor/>}/>
               <Route path={`/personalAccount/*`} element={<PersonalAccount/>}/>
           </Routes>
           <Footer/>

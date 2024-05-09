@@ -5,13 +5,14 @@ import {Container} from "../../components/Container/Container.ts";
 import {HeaderMenu} from "./headerMenu/HeaderMenu.tsx";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logout, selectIsAuth} from "../../redux/slices/auth.ts";
+import {logout, selectIsAdmin, selectIsAuth} from "../../redux/slices/auth.ts";
 import {AppDispatch} from "../../redux/store.ts";
 import {Button} from "../../components/Button/Button.tsx";
 
 
 export const Header = () => {
     const isAuth = useSelector(selectIsAuth);
+    const isAdmin = useSelector(selectIsAdmin);
     const dispatch = useDispatch<AppDispatch>();
     console.log(isAuth)
     const onClickLogout = () => {
@@ -23,14 +24,19 @@ export const Header = () => {
 
     let items = []
     isAuth
-        ? items = [
-            {label: "Репетиторы", path: "/tutors/:page"},
-            {label: "Стать репетитором", path: "/become-tutor"},
-            {label: "Личный кабинет", path: "/personalAccount"},
-        ]
+        ? isAdmin
+            ? items = [
+                {label: "Репетиторы", path: "/tutors/:page"},
+                {label: "Личный кабинет", path: "/personalAccount"},
+            ]
+            : items = [
+                {label: "Репетиторы", path: "/tutors/:page"},
+                {label: "Стать репетитором", path: "/tutors/create"},
+                {label: "Личный кабинет", path: "/personalAccount"},
+            ]
         : items = [
             {label: "Репетиторы", path: "/tutors/:page"},
-            {label: "Стать репетитором", path: "/become-tutor"},
+            {label: "Стать репетитором", path: "/tutors/create"},
             {label: "Вход", path: "/login"},
             {label: "Регистрация", path: "/register"}
         ]

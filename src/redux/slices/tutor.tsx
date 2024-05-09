@@ -15,16 +15,16 @@ type TutorType = {
     teachingFormat: string
     description?: string
     resume?: {
-        experience: string;
-        education: string;
+        experience: string
+        education: string
     }
     certificates?: string[]
 }
 
 // Тип для начального состояния
 type TutorStateType = {
-    items: TutorType[];
-    status: 'loading' | 'loaded' | 'error';
+    items: TutorType[]
+    status: 'loading' | 'loaded' | 'error'
 }
 
 const initialState: TutorStateType = {

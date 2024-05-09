@@ -5,74 +5,36 @@ import {FlexWrapper} from "../../components/FlexWrapper/FlexWrapper.tsx";
 import {Link, useParams} from 'react-router-dom';
 import {Pagination, PaginationItem} from "@mui/material";
 import styled from "styled-components";
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../redux/store.ts";
-import {fetchTutors} from "../../redux/slices/tutor.tsx";
+import React from "react";
 
-function Content() {
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(fetchTutors());
-    }, [dispatch]);
+type TutorType = {
+    user: {
+        fullName: string;
+        avatarUrl: string;
+    }
+    subjects: string[]
+    pricePerHour: number
+    location?: string
+    rating: number
+    qualification?: string
+    teachingFormat: string
+    description?: string
+    resume?: {
+        experience: string;
+        education: string;
+    }
+    certificates?: string[]
+}
+
+type ShowTutorPropsType = {
+    tutorItems: TutorType[]
+    status: 'loading' | 'loaded' | 'error'
+}
+
+function Content({tutorItems, status} : ShowTutorPropsType) {
     const { page } =  useParams<{ page: string }>();
     const tutorsPerPage = 4;
-
-    // // Создаем данные о репетиторе
-    // const [tutorData, setTutorData] = useState([
-    //     {
-    //         tutorName: "Станислав Борисов",
-    //         subjects: ["Матемитика", "Физика"],
-    //         qualification: "Кандидат наук",
-    //         description: "Преподаватель ВУЗа с 17-летним опытом работы Математика (программа средней школы, высшая математика), математический анализ, внешнее независимое оценивание, подготовка к экзаменам (зачетам, контрольным работам и др. )",
-    //         rating: 5,
-    //         experience: "5 лет",
-    //         pricePerHour: 20,
-    //         reviewsCount: 12
-    //     },
-    //     {
-    //         tutorName: "Станислав Борисов",
-    //         subjects: ["Матемитика", "Физика"],
-    //         qualification: "Кандидат наук",
-    //         description: "Преподаватель ВУЗа с 17-летним опытом работы Математика (программа средней школы, высшая математика), математический анализ, внешнее независимое оценивание, подготовка к экзаменам (зачетам, контрольным работам и др. )",
-    //         rating: 5,
-    //         experience: "5 лет",
-    //         pricePerHour: 20,
-    //         reviewsCount: 12
-    //     }, {
-    //         tutorName: "Станислав Борисов",
-    //         subjects: ["Матемитика", "Физика"],
-    //         qualification: "Кандидат наук",
-    //         description: "Преподаватель ВУЗа с 17-летним опытом работы Математика (программа средней школы, высшая математика), математический анализ, внешнее независимое оценивание, подготовка к экзаменам (зачетам, контрольным работам и др. )",
-    //         rating: 5,
-    //         experience: "5 лет",
-    //         pricePerHour: 20,
-    //         reviewsCount: 12
-    //     }, {
-    //         tutorName: "Станислав Борисов",
-    //         subjects: ["Матемитика", "Физика"],
-    //         qualification: "Кандидат наук",
-    //         description: "Преподаватель ВУЗа с 17-летним опытом работы Математика (программа средней школы, высшая математика), математический анализ, внешнее независимое оценивание, подготовка к экзаменам (зачетам, контрольным работам и др. )",
-    //         rating: 5,
-    //         experience: "5 лет",
-    //         pricePerHour: 20,
-    //         reviewsCount: 12
-    //     }, {
-    //         tutorName: "Станислав Борисов",
-    //         subjects: ["Матемитика", "Физика"],
-    //         qualification: "Кандидат наук",
-    //         description: "Преподаватель ВУЗа с 17-летним опытом работы Математика (программа средней школы, высшая математика), математический анализ, внешнее независимое оценивание, подготовка к экзаменам (зачетам, контрольным работам и др. )",
-    //         rating: 5,
-    //         experience: "5 лет",
-    //         pricePerHour: 20,
-    //         reviewsCount: 12
-    //     },
-    //     // Добавьте других репетиторов по аналогии, если нужно
-    // ]);
-    //
-
-    const { items: tutorData, status } = useSelector((state: RootState) => state.tutor);
 
     // Если данные загружаются, показываем индикатор загрузки
     if (status === 'loading') {
@@ -81,7 +43,7 @@ function Content() {
 
     const startIndex = (parseInt(page ?? '1', 10) - 1) * tutorsPerPage;
     const endIndex = startIndex + tutorsPerPage;
-    const tutorsToShow = tutorData.slice(startIndex, endIndex);
+    const tutorsToShow = tutorItems.slice(startIndex, endIndex);
 
     return (
         <React.Fragment>
@@ -105,7 +67,7 @@ function Content() {
             <FlexWrapper justify={"center"}>
                 <Pagination
                     page={(parseInt(page ?? '1', 10) - 1) * tutorsPerPage}
-                    count={Math.ceil(tutorData.length / tutorsPerPage)}
+                    count={Math.ceil(tutorItems.length / tutorsPerPage)}
                     renderItem={(item) => (
                         <PaginationItem
                             component={Link}
@@ -120,11 +82,11 @@ function Content() {
 }
 
 
-export const ShowTutor = () => {
+export const ShowTutor = ({tutorItems, status} : ShowTutorPropsType) => {
     return (
         <ShowTutorStyled>
             <Container>
-                <Content />
+                <Content tutorItems={tutorItems} status={status}/>
             </Container>
         </ShowTutorStyled>
     );
