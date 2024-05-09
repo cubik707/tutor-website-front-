@@ -10,6 +10,8 @@ import {Routes, Route} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.ts";
+import {PersonalAccount} from "./pages/PersonalAccount/PersonalAccount.tsx";
+import {MyReviews} from "./pages/PersonalAccount/MyReviews.tsx";
 
 
 
@@ -29,6 +31,7 @@ function App() {
               <Route path={"/register"} element={ <Registration/>}/>
               <Route path={"/tutors/:page"} element={<ChooseTutor/>}/>
               <Route path={`/tutors/:_id`} element={<TutorPage/>}/>
+              <Route path={`/personalAccount/*`} element={<PersonalAccount/>}/>
           </Routes>
           <Footer/>
       </>

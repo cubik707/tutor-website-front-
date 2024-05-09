@@ -26,9 +26,9 @@ export const Registration = () => {
         },
     } = useForm({
         defaultValues: {
-            fullName: 'Алексей Сафронов',
-            email: 'safronovA1234@test.ru',
-            password: '1234'
+            fullName: '',
+            email: '@test.ru',
+            password: '12345'
         },
         mode: 'onChange',
     });

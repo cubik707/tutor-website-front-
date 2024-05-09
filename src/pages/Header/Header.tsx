@@ -26,7 +26,7 @@ export const Header = () => {
         ? items = [
             {label: "Репетиторы", path: "/tutors/:page"},
             {label: "Стать репетитором", path: "/become-tutor"},
-            {label: "Личный кабинет", path: "/"},
+            {label: "Личный кабинет", path: "/personalAccount"},
         ]
         : items = [
             {label: "Репетиторы", path: "/tutors/:page"},
