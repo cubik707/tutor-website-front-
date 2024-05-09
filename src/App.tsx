@@ -27,8 +27,8 @@ function App() {
               <Route path={"/"} element={<MainPage/>}/>
               <Route path={"/login"} element={<Login/>}/>
               <Route path={"/register"} element={ <Registration/>}/>
-              <Route path={"/tutors"} element={<ChooseTutor/>}/>
-              <Route path={"/tutors/${_id}"} element={<TutorPage/>}/>
+              <Route path={"/tutors/:page"} element={<ChooseTutor/>}/>
+              <Route path={`/tutors/:_id`} element={<TutorPage/>}/>
           </Routes>
           <Footer/>
       </>

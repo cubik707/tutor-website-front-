@@ -2,11 +2,11 @@
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useState} from "react";
 import styled from "styled-components";
-import {FlexWrapper} from "../../../components/FlexWrapper/FlexWrapper.tsx";
-import {Button} from "../../../components/Button/Button.tsx";
+import {FlexWrapper} from "../FlexWrapper/FlexWrapper.tsx";
+import {Button} from "../Button/Button.tsx";
 
 
-export const SelectOption = () => {
+export const SelectOptionTutor = () => {
     const [subject, setSubject] = useState('');
 
     const handleChangeSubject = (event: SelectChangeEvent) => {
@@ -72,7 +72,7 @@ export const SelectOption = () => {
                         value={offline}
                         onChange={handleChangeOffline}
                         autoWidth
-                        label="Оффлайн"
+                        label="Формат обучения"
                     >
                         <MenuItem value="">
                             <em>-</em>
@@ -91,7 +91,7 @@ export const SelectOption = () => {
 const SelectOptionStyled = styled.div`
     height: 155px;
     border: 1px solid rgb(108, 108, 114);
-    background: rgba(245, 245, 245, 0.87);
+    background: rgba(245, 245, 245, 1);
     display: flex;
     align-items: center;
     justify-content: space-between;

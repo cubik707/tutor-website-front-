@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Container} from "../../../components/Container/Container.ts";
 import SelectTutorImg from "../../../assets/SelectTutor-img.png";
-import {SelectOption} from "./SelectOption.tsx";
+import {SelectOptionTutor} from "../../../components/SelectOptionTutor/SelectOptionTutor.tsx";
 
 
 export const SelectTutor = () => {
@@ -10,7 +10,7 @@ export const SelectTutor = () => {
         <SelectTutorStyled>
             <Container>
                 <Title>Выбирайте лучших репетиторов с помощью tutor</Title>
-                <SelectOption/>
+                <SelectOptionTutor/>
             </Container>
         </SelectTutorStyled>
     );
@@ -30,7 +30,7 @@ const Title = styled.h1`
     margin-bottom: 86px;
 `
 
-// const SelectOption = styled.div`
+// const SelectOptionTutor = styled.div`
 //     height: 155px;
 //     border: 1px solid rgb(108, 108, 114);
 //     background: rgba(245, 245, 245, 0.87);

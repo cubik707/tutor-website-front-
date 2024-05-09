@@ -2,16 +2,14 @@ import {TutorCard} from "../../components/TutorCard/TutorCard.tsx";
 import {Container} from "../../components/Container/Container.ts";
 import {TutorInfo} from "../../components/TutorInfo/TutorInfo.tsx";
 import {FlexWrapper} from "../../components/FlexWrapper/FlexWrapper.tsx";
-import {Link, MemoryRouter, Route, Routes, useLocation} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {Pagination, PaginationItem} from "@mui/material";
 import styled from "styled-components";
 import {useState} from "react";
 import React from "react";
 
 function Content() {
-    const location = useLocation();
-    const query = new URLSearchParams(location.search);
-    const page = parseInt(query.get('page') || '1', 10);
+    const { page } =  useParams<{ page: string }>();
     const tutorsPerPage = 4;
 
     // Создаем данные о репетиторе
@@ -66,10 +64,10 @@ function Content() {
         // Добавьте других репетиторов по аналогии, если нужно
     ]);
 
-    // Вычисляем индекс начала и конца отображаемых репетиторов на текущей странице
-    const startIndex = (page - 1) * tutorsPerPage;
+    const startIndex = (parseInt(page ?? '1', 10) - 1) * tutorsPerPage;
     const endIndex = startIndex + tutorsPerPage;
     const tutorsToShow = tutorData.slice(startIndex, endIndex);
+
     return (
         <React.Fragment>
             {tutorsToShow.map((tutor, index) => (
@@ -81,7 +79,7 @@ function Content() {
                                    description={tutor.description}/>
 
                         <TutorInfo btnTitle={"Перейти к профилю"}
-                                   onClickHandler={()=>{}}
+                                   onClickHandler={() => {}}
                                    rating={tutor.rating}
                                    experience={tutor.experience}
                                    pricePerHour={tutor.pricePerHour}
@@ -91,34 +89,29 @@ function Content() {
             ))}
             <FlexWrapper justify={"center"}>
                 <Pagination
-                    page={page}
-                    count={Math.ceil(tutorData.length / tutorsPerPage)} // Вычисляем общее количество страниц
+                    page={(parseInt(page ?? '1', 10) - 1) * tutorsPerPage}
+                    count={Math.ceil(tutorData.length / tutorsPerPage)}
                     renderItem={(item) => (
                         <PaginationItem
                             component={Link}
-                            to={`/inbox${item.page === 1 ? '' : `?page=${item.page}`}`}
+                            to={`/tutors/${item.page}`}
                             {...item}
                         />
                     )}
                 />
             </FlexWrapper>
-
         </React.Fragment>
     );
 }
+
 
 export const ShowTutor = () => {
     return (
         <ShowTutorStyled>
             <Container>
-                <MemoryRouter initialEntries={['/inbox']} initialIndex={0}>
-                    <Routes>
-                        <Route path="*" element={<Content/>}/>
-                    </Routes>
-                </MemoryRouter>
+                <Content />
             </Container>
         </ShowTutorStyled>
-
     );
 }
 

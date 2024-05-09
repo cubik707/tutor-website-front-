@@ -24,7 +24,7 @@ export const TutorPage = () => {
                 </Container>
             </TitleBlock>
             <Routes>
-                <Route path={"/tutors/:id/info"} element={<TutorInfoBlock reviewItems={reviewItems}/>} />
+                <Route path={"/"} element={<TutorInfoBlock reviewItems={reviewItems}/>} />
                 <Route path={"/reviews/create"} element={<ReviewForm/>} />
             </Routes>
         </>

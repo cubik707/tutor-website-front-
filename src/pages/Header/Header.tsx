@@ -24,12 +24,12 @@ export const Header = () => {
     let items = []
     isAuth
         ? items = [
-            {label: "Репетиторы", path: "/tutors"},
+            {label: "Репетиторы", path: "/tutors/:page"},
             {label: "Стать репетитором", path: "/become-tutor"},
             {label: "Личный кабинет", path: "/"},
         ]
         : items = [
-            {label: "Репетиторы", path: "/tutors"},
+            {label: "Репетиторы", path: "/tutors/:page"},
             {label: "Стать репетитором", path: "/become-tutor"},
             {label: "Вход", path: "/login"},
             {label: "Регистрация", path: "/register"}
