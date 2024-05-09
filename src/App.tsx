@@ -11,7 +11,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth.ts";
 import {PersonalAccount} from "./pages/PersonalAccount/PersonalAccount.tsx";
-import {MyReviews} from "./pages/PersonalAccount/MyReviews.tsx";
 
 
 

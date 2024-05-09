@@ -9,12 +9,6 @@ import {fetchReviews} from "../../redux/slices/review.ts";
 import {AppDispatch, RootState} from "../../redux/store.ts";
 
 
-// const reviewItems = [
-//     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-//     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-//     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-//     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-// ];
 export const MainPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { items, status } = useSelector((state: RootState) => state.reviews);

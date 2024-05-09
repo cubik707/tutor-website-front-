@@ -1,15 +1,26 @@
 import styled from "styled-components";
 import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {theme} from "../../styles/Theme.ts";
-import {Link, Outlet, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
 import {Container} from "../../components/Container/Container.ts";
 import {MyReviews} from "./MyReviews.tsx";
 import {Home} from "./Home.tsx";
+import {useSelector} from "react-redux";
+import {selectIsAdmin} from "../../redux/slices/auth.ts";
 
 export const PersonalAccount = () => {
-    const menuItems = [
-        {label: "Мои отзывы", path: "/personalAccount/reviews"},
-    ]
+    const isAdmin = useSelector(selectIsAdmin);
+    let menuItems = [];
+    isAdmin
+        ?
+        menuItems = [
+            {label: "Мои отзывы", path: "/personalAccount/reviews"},
+            {label: "Управление репетиторами", path: "/personalAccount/tutors"},
+            {label: "Управление пользователями", path: "/personalAccount/users"},
+        ]
+        : menuItems = [
+            {label: "Мои отзывы", path: "/personalAccount/reviews"},
+        ]
     return (
         <>
             <InfoPanel>
@@ -28,6 +39,8 @@ export const PersonalAccount = () => {
             <Routes>
                 <Route path={'/'} element={<Home/>}/>
                 <Route path={'/reviews'} element={<MyReviews/>}/>
+                <Route path={'/tutors'} element={<MyReviews/>}/>
+                <Route path={'/users'} element={<MyReviews/>}/>
             </Routes>
 
         </>
@@ -37,6 +50,10 @@ export const PersonalAccount = () => {
 const InfoPanel = styled.section`
     padding: 175px 0 65px 0;
     background-color: ${theme.colors.fontBlack};
+    ul{
+        display: flex;
+        gap: 35px;
+    }
 `
 
 const LinkStyled = styled(Link)`

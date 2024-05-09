@@ -6,6 +6,10 @@ import {Review} from "../../components/Review/Review.tsx";
 import {TutorInfoBlock} from "./TutorInfoBlock.tsx";
 import {ReviewForm} from "./ReviewForm.tsx";
 import {Routes, Route} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../../redux/store.ts";
+import {useEffect} from "react";
+import {fetchReviews} from "../../redux/slices/review.ts";
 
 const reviewItems = [
     <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,

@@ -6,7 +6,7 @@ import {Button} from "../Button/Button.tsx";
 type TutorInfoPropsType = {
     rating: number
     pricePerHour: number
-    experience: string
+    experience: string | undefined
     reviewsCount: number
     btnTitle: string
     onClickHandler: () => void
@@ -49,7 +49,7 @@ const TutorInfoStyled = styled.div`
     svg{
         position: absolute;
         top: 53px;
-        left: 35px;
+        left: 53px;
     }
 `
 

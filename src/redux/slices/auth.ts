@@ -83,6 +83,11 @@ const authSlice = createSlice({
 });
 
 export const selectIsAuth = (state: RootState) => Boolean(state.auth.data);
+export const selectIsAdmin = (state: RootState) => {
+    const userData = state.auth.data as { isAdmin: boolean } | null; // Явное указание типа для userData
+    return userData ? userData.isAdmin : false;
+}
+
 export const authReducer = authSlice.reducer;
 
 export const {logout} = authSlice.actions;
