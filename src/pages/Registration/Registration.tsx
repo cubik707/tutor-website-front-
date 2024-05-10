@@ -4,7 +4,7 @@ import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/store.ts";
-import {fetchAuth, fetchRegister, selectIsAuth} from "../../redux/slices/auth.ts";
+import {fetchRegister, selectIsAuth} from "../../redux/slices/auth.ts";
 import {useForm} from "react-hook-form";
 import {Navigate} from "react-router-dom";
 

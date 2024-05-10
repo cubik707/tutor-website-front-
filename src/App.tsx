@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAuthMe} from "./redux/slices/auth.ts";
 import {PersonalAccount} from "./pages/PersonalAccount/PersonalAccount.tsx";
-import {fetchTutors} from "./redux/slices/tutor.tsx";
+import {fetchTutors} from "./redux/slices/tutor.ts";
 import {RootState} from "./redux/store.ts";
 import {BecomeTutor} from "./pages/BecomeTutor/BecomeTutor.tsx";
 

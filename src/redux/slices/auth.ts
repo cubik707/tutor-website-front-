@@ -28,11 +28,22 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
     return data;
 });
 
-const initialState = {
-    data: null,
-    status: 'loading',
-};
+interface AuthData {
+    createdAt: string;
+    email: string;
+    fullName?: string;
+    avatarUrl?: string;
+    isAdmin: boolean;
+    updatedAt: string;
+    __v: number;
+    _id: string;
+}
 
+
+const initialState: { data: AuthData | null, status: string } = {
+    data: null,
+    status: "loading"
+};
 const authSlice = createSlice({
     name: 'auth',
     initialState,
