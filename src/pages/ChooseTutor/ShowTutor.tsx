@@ -6,34 +6,13 @@ import {Link, useParams} from 'react-router-dom';
 import {Pagination, PaginationItem} from "@mui/material";
 import styled from "styled-components";
 import React from "react";
+import {useSelector} from "react-redux";
+import {selectTutor} from "../../redux/slices/tutor.ts";
 
 
-type TutorType = {
-    user: {
-        fullName: string;
-        avatarUrl: string;
-    }
-    subjects: string[]
-    pricePerHour: number
-    location?: string
-    rating: number
-    qualification?: string
-    teachingFormat: string
-    description?: string
-    resume?: {
-        experience: string;
-        education: string;
-    }
-    certificates?: string[]
-}
-
-type ShowTutorPropsType = {
-    tutorItems: TutorType[]
-    status: 'loading' | 'loaded' | 'error'
-}
-
-function Content({tutorItems, status} : ShowTutorPropsType) {
+function Content() {
     const { page } =  useParams<{ page: string }>();
+    const {items, status} = useSelector(selectTutor);
     const tutorsPerPage = 4;
 
     // Если данные загружаются, показываем индикатор загрузки
@@ -43,7 +22,7 @@ function Content({tutorItems, status} : ShowTutorPropsType) {
 
     const startIndex = (parseInt(page ?? '1', 10) - 1) * tutorsPerPage;
     const endIndex = startIndex + tutorsPerPage;
-    const tutorsToShow = tutorItems.slice(startIndex, endIndex);
+    const tutorsToShow = items.slice(startIndex, endIndex);
 
     return (
         <React.Fragment>
@@ -67,7 +46,7 @@ function Content({tutorItems, status} : ShowTutorPropsType) {
             <FlexWrapper justify={"center"}>
                 <Pagination
                     page={(parseInt(page ?? '1', 10) - 1) * tutorsPerPage}
-                    count={Math.ceil(tutorItems.length / tutorsPerPage)}
+                    count={Math.ceil(items.length / tutorsPerPage)}
                     renderItem={(item) => (
                         <PaginationItem
                             component={Link}
@@ -82,11 +61,11 @@ function Content({tutorItems, status} : ShowTutorPropsType) {
 }
 
 
-export const ShowTutor = ({tutorItems, status} : ShowTutorPropsType) => {
+export const ShowTutor = () => {
     return (
         <ShowTutorStyled>
             <Container>
-                <Content tutorItems={tutorItems} status={status}/>
+                <Content/>
             </Container>
         </ShowTutorStyled>
     );

@@ -1,39 +1,44 @@
-
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useState} from "react";
 import styled from "styled-components";
 import {FlexWrapper} from "../FlexWrapper/FlexWrapper.tsx";
 import {Button} from "../Button/Button.tsx";
+import {Navigate} from "react-router-dom";
 
 
 export const SelectOptionTutor = () => {
-    const [subject, setSubject] = useState('');
+    const [selectedSubject, setSelectedSubject] = useState('');
 
     const handleChangeSubject = (event: SelectChangeEvent) => {
-        setSubject(event.target.value);
+        setSelectedSubject(event.target.value);
     };
 
-    const [city, setCity] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
 
     const handleChangeCity = (event: SelectChangeEvent) => {
-        setCity(event.target.value);
+        setSelectedCity(event.target.value);
     };
 
-    const [offline, setOffline] = useState('');
+    const [selectedOffline, setSelectedOffline] = useState('');
 
     const handleChangeOffline = (event: SelectChangeEvent) => {
-        setOffline(event.target.value);
+        setSelectedOffline(event.target.value);
     };
+
+    const filteredTutors = () => {
+
+        return <Navigate to={'/tutors'}/>;
+    }
 
     return (
         <SelectOptionStyled>
             <FlexWrapper gap={"15px"}>
-                <FormControl sx={{ m: 0, minWidth: 330 }}>
+                <FormControl sx={{m: 0, minWidth: 330}}>
                     <InputLabel id="choose-subject-label">Выберите предмет</InputLabel>
                     <Select
                         labelId="choose-subject-label"
                         id="choose-subject"
-                        value={subject}
+                        value={selectedSubject}
                         onChange={handleChangeSubject}
                         autoWidth
                         label="Выберите предмет"
@@ -51,12 +56,12 @@ export const SelectOptionTutor = () => {
                         <MenuItem value={'История'}>Обществоведение</MenuItem>
                     </Select>
                 </FormControl>
-                <FormControl sx={{ m: 0, minWidth: 330 }}>
+                <FormControl sx={{m: 0, minWidth: 330}}>
                     <InputLabel id="choose-city-label">Выберите город</InputLabel>
                     <Select
                         labelId="choose-city-label"
                         id="choose-city"
-                        value={city}
+                        value={selectedCity}
                         onChange={handleChangeCity}
                         autoWidth
                         label="Выберите город"
@@ -69,12 +74,12 @@ export const SelectOptionTutor = () => {
                         <MenuItem value={'Гродно'}>Гродно</MenuItem>
                     </Select>
                 </FormControl>
-                <FormControl sx={{ m: 0, minWidth: 230 }}>
+                <FormControl sx={{m: 0, minWidth: 230}}>
                     <InputLabel id="choose-offline-label">Формат обучения</InputLabel>
                     <Select
                         labelId="choose-offline-label"
                         id="choose-offline"
-                        value={offline}
+                        value={selectedOffline}
                         onChange={handleChangeOffline}
                         autoWidth
                         label="Формат обучения"
@@ -86,7 +91,7 @@ export const SelectOptionTutor = () => {
                         <MenuItem value={'Брест'}>Онлайн</MenuItem>
                     </Select>
                 </FormControl>
-                <Button height={"56px"} width={"150px"} title = {"Найти"} onClick={() => {}}/>
+                <Button height={"56px"} width={"150px"} title={"Найти"} onClick={filteredTutors}/>
             </FlexWrapper>
 
         </SelectOptionStyled>

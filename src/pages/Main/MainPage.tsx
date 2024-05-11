@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchReviews} from "../../redux/slices/review.ts";
 import {AppDispatch, RootState} from "../../redux/store.ts";
 
-
 export const MainPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { items, status } = useSelector((state: RootState) => state.reviews);
@@ -33,7 +32,7 @@ export const MainPage = () => {
 
     return (
         <>
-            <SelectTutor/>
+            <SelectTutor />
             <ConvenientService/>
             <ReviewAboutTutor reviewItems={reviewItems} title={"Отзывы о репетиторах"} status={status}/>
             <WhyTutor/>

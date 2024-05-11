@@ -5,7 +5,6 @@ import {theme} from "../../styles/Theme.ts";
 import {SelectOptionTutor} from "../../components/SelectOptionTutor/SelectOptionTutor.tsx";
 
 
-
 export const SearchTutor = () => {
 
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../axios.ts";
+import {RootState} from "../store.ts";
 
 // Тип для данных о репетиторе
 type TutorType = {
@@ -79,4 +80,5 @@ const tutorsSlice = createSlice({
     },
 });
 
+export const selectTutor = (state: RootState) => state.tutor;
 export const tutorsReducer = tutorsSlice.reducer;
