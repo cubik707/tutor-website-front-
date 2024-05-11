@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {theme} from "../../styles/Theme.ts";
 
 type ButtonPropsType = {
-    title: string
+    title: string | undefined
     onClick?:() => void
     width?: string
     height?: string

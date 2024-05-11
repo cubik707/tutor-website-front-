@@ -7,6 +7,7 @@ import {MyReviews} from "./MyReviews.tsx";
 import {Home} from "./Home.tsx";
 import {useSelector} from "react-redux";
 import {selectIsAdmin} from "../../redux/slices/auth.ts";
+import {TutorControl} from "./TutorControl.tsx";
 
 export const PersonalAccount = () => {
     const isAdmin = useSelector(selectIsAdmin);
@@ -14,8 +15,7 @@ export const PersonalAccount = () => {
     isAdmin
         ?
         menuItems = [
-            {label: "Мои отзывы", path: "/personalAccount/reviews"},
-            {label: "Управление репетиторами", path: "/personalAccount/tutors"},
+            {label: "Управление репетиторами", path: "/personalAccount/tutorApplication/:1"},
             {label: "Управление пользователями", path: "/personalAccount/users"},
         ]
         : menuItems = [
@@ -39,7 +39,7 @@ export const PersonalAccount = () => {
             <Routes>
                 <Route path={'/'} element={<Home/>}/>
                 <Route path={'/reviews'} element={<MyReviews/>}/>
-                <Route path={'/tutors'} element={<MyReviews/>}/>
+                <Route path={'/tutorApplication/:1'} element={<TutorControl/>}/>
                 <Route path={'/users'} element={<MyReviews/>}/>
             </Routes>
 

@@ -14,6 +14,7 @@ import {AppDispatch, RootState} from "../../redux/store.ts";
 import {useForm} from "react-hook-form";
 import {fetchTutorApplication} from "../../redux/slices/tutorApplication.ts";
 import {selectIsAuth} from "../../redux/slices/auth.ts";
+import {Navigate} from "react-router-dom";
 
 type TutorApplicationType = {
     subjects: string[]
@@ -63,7 +64,8 @@ export const BecomeTutor = () => {
 
         // Обработка ответа от сервера
         if (response.payload) {
-            alert('Заявка успешно подана!')
+            alert('Заявка успешно подана!');
+            return <Navigate to={'/'}/>
         } else {
             alert('Не удалось подать заявку!')
         }

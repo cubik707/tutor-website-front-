@@ -39,6 +39,13 @@ export const fetchTutors = createAsyncThunk('tutors/fetchTutors',
     }
 );
 
+export const fetchTutorsCreate = createAsyncThunk('tutors/fetchTutorsCreate',
+    async (params: TutorType) => {
+        const { data } = await axios.post('/tutors/create', params);
+        return data;
+    }
+);
+
 const tutorsSlice = createSlice({
     name: 'tutors',
     initialState,
@@ -56,7 +63,19 @@ const tutorsSlice = createSlice({
             .addCase(fetchTutors.rejected, (state) => {
                 state.items = [];
                 state.status = 'error';
-            });
+            })
+            .addCase(fetchTutorsCreate.pending, (state) => {
+                state.items = [];
+                state.status = 'loading';
+            })
+            .addCase(fetchTutorsCreate.fulfilled, (state, action) => {
+                state.items = action.payload;
+                state.status = 'loaded';
+            })
+            .addCase(fetchTutorsCreate.rejected, (state) => {
+                state.items = [];
+                state.status = 'error';
+            })
     },
 });
 

@@ -37,7 +37,7 @@ function App() {
               <Route path={"/"} element={<MainPage/>}/>
               <Route path={"/login"} element={<Login/>}/>
               <Route path={"/register"} element={ <Registration/>}/>
-              <Route path={"/tutors/:page"} element={<ChooseTutor tutorItems={tutorData} status={status}/>}/>
+              <Route path={"/tutors/:1"} element={<ChooseTutor tutorItems={tutorData} status={status}/>}/>
               <Route path={'/tutors/:_id'} element={<TutorPage/>}/>
               <Route path={'/tutors/create'} element={<BecomeTutor/>}/>
               <Route path={`/personalAccount/*`} element={<PersonalAccount/>}/>

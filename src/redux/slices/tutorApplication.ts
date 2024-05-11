@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../axios.ts";
 
 // Тип для данных о репетиторе
 type TutorApplicationType = {
+    _id: string
     user: {
         fullName: string;
         avatarUrl: string;
@@ -42,9 +43,21 @@ const initialState: TutorApplicationStateType = {
 
 export const fetchTutorApplication = createAsyncThunk('tutorApplication/fetchTutorApplication',
     async (params: TutorApplicationType) => {
-        const { data } = await axios.post('/tutorApplication/create', params);
+        const {data} = await axios.post('/tutorApplication/create', params);
         return data;
     }
+);
+
+export const fetchTutorApplicationGET = createAsyncThunk('tutorApplication/fetchTutorApplicationGET',
+    async () => {
+        const {data} = await axios.get('/tutorApplication');
+        return data;
+    }
+);
+
+export const fetchRemoveTutorApplication = createAsyncThunk('tutorApplication/fetchRemoveTutorApplication',
+    async (id) =>
+        axios.delete(`/tutorApplication/${id}`)
 );
 
 const tutorApplicationSlice = createSlice({
@@ -64,7 +77,29 @@ const tutorApplicationSlice = createSlice({
             .addCase(fetchTutorApplication.rejected, (state) => {
                 state.items = [];
                 state.status = 'error';
-            });
+            })
+            .addCase(fetchTutorApplicationGET.pending, (state) => {
+                state.items = [];
+                state.status = 'loading';
+            })
+            .addCase(fetchTutorApplicationGET.fulfilled, (state, action) => {
+                state.items = action.payload;
+                state.status = 'loaded';
+            })
+            .addCase(fetchTutorApplicationGET.rejected, (state) => {
+                state.items = [];
+                state.status = 'error';
+            })
+            .addCase(fetchRemoveTutorApplication.pending, (state, action) => {
+                const id = action.meta.arg;
+                if (typeof id !== 'undefined') {
+                    state.items = state.items.filter(obj => obj._id !== id);
+                }
+                state.status = 'loading';
+            })
+            .addCase(fetchRemoveTutorApplication.fulfilled, (state) => {
+                state.status = 'loaded';
+            })
     },
 });
 

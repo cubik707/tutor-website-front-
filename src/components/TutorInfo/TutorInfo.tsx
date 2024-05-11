@@ -10,8 +10,20 @@ type TutorInfoPropsType = {
     reviewsCount: number
     btnTitle: string
     onClickHandler: () => void
+    secondBtn?: boolean
+    secondBtnTitle?: string
+    secondBtnOnClickHandler?: () => void
 };
-export const TutorInfo = ({rating, reviewsCount, experience, pricePerHour, btnTitle, onClickHandler}: TutorInfoPropsType) => {
+export const TutorInfo = ({
+                              rating,
+                              reviewsCount,
+                              experience,
+                              pricePerHour,
+                              btnTitle,
+                              onClickHandler,
+                              secondBtn,
+                              secondBtnTitle,
+                              secondBtnOnClickHandler}: TutorInfoPropsType) => {
     return (
         <TutorInfoStyled>
             <FlexWrapper direction={"column"} gap={"10px"} margin={"0 0 30px 0"}>
@@ -34,14 +46,19 @@ export const TutorInfo = ({rating, reviewsCount, experience, pricePerHour, btnTi
                     {reviewsCount}
                 </Text>
             </FlexWrapper>
-            <FlexWrapper>
-                <Button width={"389px"} height={"50px"} title={btnTitle} onClick={onClickHandler}/>
+            <FlexWrapper direction={"column"} gap={"15px"}>
+                <Button width={"100%"} height={"50px"} title={btnTitle} onClick={onClickHandler}/>
+                {secondBtn
+                    ? <Button width={"100%"} height={"50px"} title={secondBtnTitle} onClick={secondBtnOnClickHandler}/>
+                    : ''}
             </FlexWrapper>
         </TutorInfoStyled>
     );
 };
 
 const TutorInfoStyled = styled.div`
+    max-width: 450px;
+    width: 100%;
     padding: 50px 20px;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25), 4px 0 10px 0 rgba(0, 0, 0, 0.25);
     background: rgb(255, 255, 255);
