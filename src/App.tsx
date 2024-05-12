@@ -10,6 +10,7 @@ import {Routes, Route} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {fetchAuthMe} from "./redux/slices/auth.ts";
+import {fetchTutors} from "./redux/slices/tutor.ts";
 import {PersonalAccount} from "./pages/PersonalAccount/PersonalAccount.tsx";
 import {BecomeTutor} from "./pages/BecomeTutor/BecomeTutor.tsx";
 

@@ -3,7 +3,7 @@ import axios from "../../axios.ts";
 import {RootState} from "../store.ts";
 
 // Тип для данных о репетиторе
-type TutorType = {
+export type TutorType = {
     user: {
         fullName: string;
         avatarUrl: string;
@@ -24,7 +24,7 @@ type TutorType = {
 
 // Тип для начального состояния
 type TutorStateType = {
-    items: TutorType[]
+    items: Array<TutorType>
     status: 'loading' | 'loaded' | 'error'
 }
 

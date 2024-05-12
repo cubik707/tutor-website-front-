@@ -4,32 +4,52 @@ import styled from "styled-components";
 import {FlexWrapper} from "../FlexWrapper/FlexWrapper.tsx";
 import {Button} from "../Button/Button.tsx";
 import {Navigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectTutor, TutorType} from "../../redux/slices/tutor.ts";
+import {useTutorContext} from "../../context/TutorContext.tsx";
 
 
 export const SelectOptionTutor = () => {
+    const {items, status} = useSelector(selectTutor);
     const [selectedSubject, setSelectedSubject] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
+    const [selectedOffline, setSelectedOffline] = useState('');
+
+    const { filteredTutors, setFilteredTutors } = useTutorContext();
+    console.log(filteredTutors)
 
     const handleChangeSubject = (event: SelectChangeEvent) => {
         setSelectedSubject(event.target.value);
     };
 
-    const [selectedCity, setSelectedCity] = useState('');
-
     const handleChangeCity = (event: SelectChangeEvent) => {
         setSelectedCity(event.target.value);
     };
-
-    const [selectedOffline, setSelectedOffline] = useState('');
 
     const handleChangeOffline = (event: SelectChangeEvent) => {
         setSelectedOffline(event.target.value);
     };
 
-    const filteredTutors = () => {
+    const handleFilterTutors = () => {
+        let filteredTutorsTemp: TutorType[] = [...items];
 
-        return <Navigate to={'/tutors'}/>;
-    }
+        if (selectedSubject) {
+            filteredTutorsTemp = items.filter(tutor => tutor.subjects.includes(selectedSubject));
+        }
 
+        if (selectedCity) {
+            filteredTutorsTemp = items.filter(tutor => tutor.location === selectedCity);
+        }
+
+        if (selectedOffline) {
+            filteredTutorsTemp = items.filter(tutor => tutor.teachingFormat === selectedOffline);
+        }
+
+        setFilteredTutors(filteredTutorsTemp);
+
+        return <Navigate to={'/tutors'}/>
+    };
+    console.log(status);
     return (
         <SelectOptionStyled>
             <FlexWrapper gap={"15px"}>
@@ -87,11 +107,11 @@ export const SelectOptionTutor = () => {
                         <MenuItem value="">
                             <em>-</em>
                         </MenuItem>
-                        <MenuItem value={'Минск'}>Оффлайн</MenuItem>
-                        <MenuItem value={'Брест'}>Онлайн</MenuItem>
+                        <MenuItem value={'Оффлайн'}>Оффлайн</MenuItem>
+                        <MenuItem value={'Онлайн'}>Онлайн</MenuItem>
                     </Select>
                 </FormControl>
-                <Button height={"56px"} width={"150px"} title={"Найти"} onClick={filteredTutors}/>
+                <Button height={"56px"} width={"150px"} title={"Найти"} onClick={handleFilterTutors}/>
             </FlexWrapper>
 
         </SelectOptionStyled>

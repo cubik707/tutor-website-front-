@@ -8,15 +8,13 @@ type TutorCardPropsType = {
     tutorName: string
     subject: Array<string>
     qualification?: string
-    // rating: number
-    // pricePerHour: number
-    // experience: string
 };
 export const TutorCard = ({
                               description,
                               tutorName,
                               subject,
-                              qualification}: TutorCardPropsType) => {
+                              qualification,
+                              }: TutorCardPropsType) => {
     return (
         <TutorCardStyled>
             <FlexWrapper direction={"column"}>
@@ -27,10 +25,10 @@ export const TutorCard = ({
                         <SubjectItem key={index}>{item}{index !== subject.length - 1 && ', '}</SubjectItem>
                     ))}
                 </span>
-                {qualification ? <Qualification>{qualification}</Qualification> : ""}
+                {qualification ? <Info>{qualification}</Info> : ""}
             </FlexWrapper>
             <FlexWrapper gap={"25px"} margin={"45px 0 0 0"}>
-                <Avatar sx={{width:130, height: 130}}></Avatar>
+                <Avatar sx={{width: 130, height: 130}}></Avatar>
                 <Text>{description}</Text>
             </FlexWrapper>
 
@@ -77,7 +75,7 @@ const Text = styled.p`
     color: ${theme.colors.fontGray}
 `
 
-const Qualification = styled.span`
+const Info = styled.span`
     font-size: 14px;
     font-weight: 300;
     line-height: 28px;

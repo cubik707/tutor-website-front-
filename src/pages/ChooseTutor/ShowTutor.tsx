@@ -6,23 +6,19 @@ import {Link, useParams} from 'react-router-dom';
 import {Pagination, PaginationItem} from "@mui/material";
 import styled from "styled-components";
 import React from "react";
-import {useSelector} from "react-redux";
-import {selectTutor} from "../../redux/slices/tutor.ts";
+import {useTutorContext} from "../../context/TutorContext.tsx";
+
 
 
 function Content() {
-    const { page } =  useParams<{ page: string }>();
-    const {items, status} = useSelector(selectTutor);
-    const tutorsPerPage = 4;
+    const { filteredTutors, setFilteredTutors } = useTutorContext();
 
-    // Если данные загружаются, показываем индикатор загрузки
-    if (status === 'loading') {
-        return <div>Loading...</div>;
-    }
+    const { page } =  useParams<{ page: string }>();
+    const tutorsPerPage = 4;
 
     const startIndex = (parseInt(page ?? '1', 10) - 1) * tutorsPerPage;
     const endIndex = startIndex + tutorsPerPage;
-    const tutorsToShow = items.slice(startIndex, endIndex);
+    const tutorsToShow = filteredTutors.slice(startIndex, endIndex)
 
     return (
         <React.Fragment>
@@ -39,14 +35,17 @@ function Content() {
                                    rating={tutor.rating}
                                    experience={tutor.resume?.experience}
                                    pricePerHour={tutor.pricePerHour}
-                                   reviewsCount={0}/>
+                                   reviewsCount={0}
+                                   teachingFormat={tutor.teachingFormat}
+                                   city={tutor.location}
+                        />
                     </FlexWrapper>
                 </React.Fragment>
             ))}
             <FlexWrapper justify={"center"}>
                 <Pagination
                     page={(parseInt(page ?? '1', 10) - 1) * tutorsPerPage}
-                    count={Math.ceil(items.length / tutorsPerPage)}
+                    count={Math.ceil( filteredTutors.length / tutorsPerPage)}
                     renderItem={(item) => (
                         <PaginationItem
                             component={Link}

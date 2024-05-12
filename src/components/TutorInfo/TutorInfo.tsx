@@ -8,6 +8,9 @@ type TutorInfoPropsType = {
     pricePerHour: number
     experience: string | undefined
     reviewsCount: number
+    teachingFormat: string
+    city: string | undefined
+
     btnTitle: string
     onClickHandler: () => void
     secondBtn?: boolean
@@ -19,11 +22,14 @@ export const TutorInfo = ({
                               reviewsCount,
                               experience,
                               pricePerHour,
+                              teachingFormat,
+                              city,
                               btnTitle,
                               onClickHandler,
                               secondBtn,
                               secondBtnTitle,
-                              secondBtnOnClickHandler}: TutorInfoPropsType) => {
+                              secondBtnOnClickHandler
+                          }: TutorInfoPropsType) => {
     return (
         <TutorInfoStyled>
             <FlexWrapper direction={"column"} gap={"10px"} margin={"0 0 30px 0"}>
@@ -45,7 +51,16 @@ export const TutorInfo = ({
                     <Accent>Отзывы: </Accent>
                     {reviewsCount}
                 </Text>
+                <Text>
+                    <Accent>Формат обучения: </Accent>
+                    {teachingFormat}
+                </Text>
+                <Text>
+                    <Accent>Город: </Accent>
+                    {city}
+                </Text>
             </FlexWrapper>
+
             <FlexWrapper direction={"column"} gap={"15px"}>
                 <Button width={"100%"} height={"50px"} title={btnTitle} onClick={onClickHandler}/>
                 {secondBtn
@@ -63,7 +78,8 @@ const TutorInfoStyled = styled.div`
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25), 4px 0 10px 0 rgba(0, 0, 0, 0.25);
     background: rgb(255, 255, 255);
     position: relative;
-    svg{
+
+    svg {
         position: absolute;
         top: 53px;
         left: 53px;
