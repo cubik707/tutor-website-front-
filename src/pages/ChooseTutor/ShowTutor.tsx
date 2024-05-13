@@ -2,7 +2,7 @@ import {TutorCard} from "../../components/TutorCard/TutorCard.tsx";
 import {Container} from "../../components/Container/Container.ts";
 import {TutorInfo} from "../../components/TutorInfo/TutorInfo.tsx";
 import {FlexWrapper} from "../../components/FlexWrapper/FlexWrapper.tsx";
-import {Link, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Pagination, PaginationItem} from "@mui/material";
 import styled from "styled-components";
 import React from "react";
@@ -11,14 +11,20 @@ import {useTutorContext} from "../../context/TutorContext.tsx";
 
 
 function Content() {
-    const { filteredTutors, setFilteredTutors } = useTutorContext();
+    const { filteredTutors} = useTutorContext();
 
-    const { page } =  useParams<{ page: string }>();
+    const { page } =  useParams<{ page:string }>();
     const tutorsPerPage = 4;
 
     const startIndex = (parseInt(page ?? '1', 10) - 1) * tutorsPerPage;
     const endIndex = startIndex + tutorsPerPage;
     const tutorsToShow = filteredTutors.slice(startIndex, endIndex)
+
+    const navigate = useNavigate();
+
+    const onClickHandler = (id: string) => {
+        navigate(`/tutors/${id}`);
+    }
 
     return (
         <React.Fragment>
@@ -31,7 +37,7 @@ function Content() {
                                    description={tutor.description}/>
 
                         <TutorInfo btnTitle={"Перейти к профилю"}
-                                   onClickHandler={() => {}}
+                                   onClickHandler={() => onClickHandler(tutor._id)}
                                    rating={tutor.rating}
                                    experience={tutor.resume?.experience}
                                    pricePerHour={tutor.pricePerHour}
@@ -49,7 +55,7 @@ function Content() {
                     renderItem={(item) => (
                         <PaginationItem
                             component={Link}
-                            to={`/tutors/${item.page}`}
+                            to={`/tutors/choose/${item.page}`}
                             {...item}
                         />
                     )}

@@ -4,6 +4,7 @@ import {RootState} from "../store.ts";
 
 // Тип для данных о репетиторе
 export type TutorType = {
+    _id: string
     user: {
         fullName: string;
         avatarUrl: string;

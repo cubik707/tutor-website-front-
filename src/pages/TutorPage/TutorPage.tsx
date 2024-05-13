@@ -2,24 +2,14 @@ import styled from "styled-components";
 import {theme} from "../../styles/Theme.ts";
 import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {Container} from "../../components/Container/Container.ts";
-import {Review} from "../../components/Review/Review.tsx";
 import {TutorInfoBlock} from "./TutorInfoBlock.tsx";
 import {ReviewForm} from "./ReviewForm.tsx";
-import {Routes, Route} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../redux/store.ts";
-import {useEffect} from "react";
-import {fetchReviews} from "../../redux/slices/review.ts";
+import {Routes, Route, useParams} from "react-router-dom";
 
-const reviewItems = [
-    <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-    <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-    <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-    <Review rating={4} tutorName={"Анна Юдашкина"} userName={"Евгения"} comment={"Анна - замечательный репетитор. Мне понравилось работать с ней. Рекомендую."}/>,
-];
+
 
 export const TutorPage = () => {
-
+    const {id} = useParams();
     return (
         <>
             <TitleBlock>
@@ -28,8 +18,8 @@ export const TutorPage = () => {
                 </Container>
             </TitleBlock>
             <Routes>
-                <Route path={"/"} element={<TutorInfoBlock reviewItems={reviewItems}/>} />
-                <Route path={"/reviews/create"} element={<ReviewForm/>} />
+                <Route path={"/"} element={<TutorInfoBlock tutorId={id}/>}/>
+                <Route path={"/reviews/create"} element={<ReviewForm tutorId={id}/>}/>
             </Routes>
         </>
     );

@@ -15,7 +15,7 @@ type TutorId = {
 }
 
 // Создание типа для отзыва
-interface ReviewItem {
+export interface ReviewItem {
     rating: number
     tutorId: TutorId
     user: UserType

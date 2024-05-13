@@ -3,7 +3,7 @@ import {useState} from "react";
 import styled from "styled-components";
 import {FlexWrapper} from "../FlexWrapper/FlexWrapper.tsx";
 import {Button} from "../Button/Button.tsx";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectTutor, TutorType} from "../../redux/slices/tutor.ts";
 import {useTutorContext} from "../../context/TutorContext.tsx";
@@ -30,6 +30,7 @@ export const SelectOptionTutor = () => {
         setSelectedOffline(event.target.value);
     };
 
+    const navigate = useNavigate();
     const handleFilterTutors = () => {
         let filteredTutorsTemp: TutorType[] = [...items];
 
@@ -47,7 +48,7 @@ export const SelectOptionTutor = () => {
 
         setFilteredTutors(filteredTutorsTemp);
 
-        return <Navigate to={'/tutors'}/>
+        navigate('/tutors/choose/:page');
     };
     console.log(status);
     return (

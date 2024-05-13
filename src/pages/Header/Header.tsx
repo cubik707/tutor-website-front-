@@ -26,16 +26,16 @@ export const Header = () => {
     isAuth
         ? isAdmin
             ? items = [
-                {label: "Репетиторы", path: "/tutors/:page"},
+                {label: "Репетиторы", path: "/tutors/choose/:page"},
                 {label: "Личный кабинет", path: "/personalAccount"},
             ]
             : items = [
-                {label: "Репетиторы", path: "/tutors/:page"},
+                {label: "Репетиторы", path: "/tutors/choose/:page"},
                 {label: "Стать репетитором", path: "/tutors/create"},
                 {label: "Личный кабинет", path: "/personalAccount"},
             ]
         : items = [
-            {label: "Репетиторы", path: "/tutors/:page"},
+            {label: "Репетиторы", path: "/tutors/choose/:page"},
             {label: "Стать репетитором", path: "/tutors/create"},
             {label: "Вход", path: "/login"},
             {label: "Регистрация", path: "/register"}

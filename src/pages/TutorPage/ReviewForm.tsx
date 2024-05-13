@@ -5,10 +5,13 @@ import {Box, Rating, TextField} from "@mui/material";
 import {Button} from "../../components/Button/Button.tsx";
 import {useState} from "react";
 
+type ReviewFormPropsType = {
+    tutorId: string | undefined
+}
 
-export const ReviewForm = () => {
+export const ReviewForm = ({tutorId}: ReviewFormPropsType ) => {
     const [value, setValue] = useState<number | null>(0);
-
+    console.log(tutorId)
     return (
         <Block>
             <Container>
