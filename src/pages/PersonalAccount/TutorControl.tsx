@@ -95,6 +95,8 @@ function Content() {
                                    rating={tutorApplication.rating}
                                    experience={tutorApplication.resume?.experience}
                                    pricePerHour={tutorApplication.pricePerHour}
+                                   teachingFormat={tutorApplication.teachingFormat}
+                                   city={tutorApplication.location}
                                    reviewsCount={0}
                                    secondBtn
                                    secondBtnTitle={"Отклонить заявку"}

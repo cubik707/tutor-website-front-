@@ -3,15 +3,47 @@ import {Container} from "../../components/Container/Container.ts";
 import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {Box, Rating, TextField} from "@mui/material";
 import {Button} from "../../components/Button/Button.tsx";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
+import axios from "../../axios.ts";
+import {useNavigate} from "react-router-dom";
+import {EditableSpan} from "../../components/EditableSpan/EditableSpan.tsx";
 
 type ReviewFormPropsType = {
     tutorId: string | undefined
 }
 
-export const ReviewForm = ({tutorId}: ReviewFormPropsType ) => {
-    const [value, setValue] = useState<number | null>(0);
+export const ReviewForm = ({tutorId}: ReviewFormPropsType) => {
+    const navigate = useNavigate();
+    const [rating, setRating] = useState<number | null>(0);
+    const [comment, setComment] = useState();
+    const [, setLoading] = useState(false)
     console.log(tutorId)
+
+    const onSubmit = async () => {
+        try {
+            setLoading(true);
+            if (rating === 0 || tutorId === undefined) {
+                throw new Error('Неверные данные для отправки');
+            }
+
+            const fields = {
+                rating,
+                comment,
+                tutorId,
+            }
+
+            const {data} = await axios.post('/reviews', fields)
+            if(data.payload){
+                alert('Отзыв успешно отправлен!');
+                navigate('/tutors/${tutorId}');
+            }
+        } catch (err) {
+            console.warn(err);
+            alert('Ошибка при создании отзыва!');
+            setLoading(false);
+        }
+    }
+
     return (
         <Block>
             <Container>
@@ -19,28 +51,23 @@ export const ReviewForm = ({tutorId}: ReviewFormPropsType ) => {
                     <SectionTitle>Оставьте отзыв</SectionTitle>
                     <Rating
                         name="rating"
-                        value={value}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
+                        value={rating}
+                        onChange={(event, newRating) => {
+                            setRating(newRating);
                             console.log(event);
                         }}
                     />
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 0, width: '500px' },
+                            '& .MuiTextField-root': {m: 0, width: '500px'},
                         }}
                         noValidate
                         autoComplete="off"
                     >
-                        <TextField
-                            id="comment-field"
-                            label="Ваш комментарий"
-                            multiline
-                            rows={4}
-                        />
+                        <EditableSpan/>
                     </Box>
-                    <Button width={"200px"} title={"Отправить отзыв"} onClick={()=>{}}/>
+                    <Button width={"200px"} title={"Отправить отзыв"} onClick={onSubmit}/>
                 </ReviewFormStyled>
             </Container>
         </Block>
@@ -49,7 +76,7 @@ export const ReviewForm = ({tutorId}: ReviewFormPropsType ) => {
 };
 
 const Block = styled.section`
-    padding: 65px 0;    
+    padding: 65px 0;
 `
 
 const ReviewFormStyled = styled.form`

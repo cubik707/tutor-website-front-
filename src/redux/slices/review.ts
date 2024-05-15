@@ -1,9 +1,11 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../axios.ts";
+import {fetchRemoveTutorApplication} from "./tutorApplication.ts";
 
 type UserType = {
     avatarUrl: string
     fullName: string
+    _id: string
 }
 
 type UserTutorType = {
@@ -16,6 +18,7 @@ type TutorId = {
 
 // Создание типа для отзыва
 export interface ReviewItem {
+    _id: string
     rating: number
     tutorId: TutorId
     user: UserType
@@ -40,6 +43,12 @@ export const fetchReviews = createAsyncThunk('reviews/fetchReviews',
     }
 );
 
+export const fetchRemoveReview = createAsyncThunk('reviews/fetchRemoveReview',
+    async (id) => {
+        await axios.delete(`/reviews/${id}`)
+    }
+    );
+
 const reviewsSlice = createSlice({
     name: 'reviews',
     initialState,
@@ -57,7 +66,17 @@ const reviewsSlice = createSlice({
             .addCase(fetchReviews.rejected, (state) => {
                 state.items = [];
                 state.status = 'error';
-            });
+            })
+            .addCase(fetchRemoveReview.pending, (state, action) => {
+                const id = action.meta.arg;
+                if (typeof id !== 'undefined') {
+                    state.items = state.items.filter(obj => obj._id !== id);
+                }
+                state.status = 'loading';
+            })
+            .addCase(fetchRemoveReview.fulfilled, (state) => {
+                state.status = 'loaded';
+            })
     },
 });
 
