@@ -3,10 +3,9 @@ import {Container} from "../../components/Container/Container.ts";
 import {SectionTitle} from "../../components/SectionTitle/SectionTitle.tsx";
 import {Box, Rating, TextField} from "@mui/material";
 import {Button} from "../../components/Button/Button.tsx";
-import {ChangeEvent, useState} from "react";
+import {useState} from "react";
 import axios from "../../axios.ts";
 import {useNavigate} from "react-router-dom";
-import {EditableSpan} from "../../components/EditableSpan/EditableSpan.tsx";
 
 type ReviewFormPropsType = {
     tutorId: string | undefined
@@ -15,7 +14,7 @@ type ReviewFormPropsType = {
 export const ReviewForm = ({tutorId}: ReviewFormPropsType) => {
     const navigate = useNavigate();
     const [rating, setRating] = useState<number | null>(0);
-    const [comment, setComment] = useState();
+    const [comment,] = useState();
     const [, setLoading] = useState(false)
     console.log(tutorId)
 
@@ -33,7 +32,7 @@ export const ReviewForm = ({tutorId}: ReviewFormPropsType) => {
             }
 
             const {data} = await axios.post('/reviews', fields)
-            if(data.payload){
+            if (data.payload) {
                 alert('Отзыв успешно отправлен!');
                 navigate('/tutors/${tutorId}');
             }
@@ -65,7 +64,12 @@ export const ReviewForm = ({tutorId}: ReviewFormPropsType) => {
                         noValidate
                         autoComplete="off"
                     >
-                        <EditableSpan/>
+                        <TextField
+                            id="comment-field"
+                            label="Ваш комментарий"
+                            multiline
+                            rows={4}
+                        />
                     </Box>
                     <Button width={"200px"} title={"Отправить отзыв"} onClick={onSubmit}/>
                 </ReviewFormStyled>

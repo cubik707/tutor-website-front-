@@ -27,7 +27,7 @@ export interface ReviewItem {
 // Создание типа для начального состояния
 interface ReviewsState {
     items: ReviewItem[];
-    status:'loading' | 'loaded' | 'error';
+    status: 'loading' | 'loaded' | 'error';
 }
 
 const initialState: ReviewsState = {
@@ -37,7 +37,7 @@ const initialState: ReviewsState = {
 
 export const fetchReviews = createAsyncThunk('reviews/fetchReviews',
     async () => {
-        const { data } = await axios.get('/reviews');
+        const {data} = await axios.get('/reviews');
         return data;
     }
 );
@@ -46,7 +46,15 @@ export const fetchRemoveReview = createAsyncThunk('reviews/fetchRemoveReview',
     async (id) => {
         await axios.delete(`/reviews/${id}`)
     }
-    );
+);
+
+export const fetchUpdateReview = createAsyncThunk(
+    'review/fetchUpdateReview',
+    async ({ id, rating, comment }: { id: string, rating: number, comment: string | undefined }) => {
+        const response = await axios.patch(`/users/${id}`, { rating, comment });
+        return response.data;
+    }
+);
 
 const reviewsSlice = createSlice({
     name: 'reviews',
@@ -75,6 +83,12 @@ const reviewsSlice = createSlice({
             })
             .addCase(fetchRemoveReview.fulfilled, (state) => {
                 state.status = 'loaded';
+            })
+            .addCase(fetchUpdateReview.fulfilled, (state, action) => {
+                const index = state.items.findIndex(review => review._id === action.payload._id);
+                if (index !== -1) {
+                    state.items[index] = action.payload;
+                }
             })
     },
 });
