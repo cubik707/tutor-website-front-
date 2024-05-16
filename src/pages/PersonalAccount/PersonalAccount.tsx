@@ -4,11 +4,12 @@ import {theme} from "../../styles/Theme.ts";
 import {Link, Route, Routes} from "react-router-dom";
 import {Container} from "../../components/Container/Container.ts";
 import {MyReviews} from "./MyReviews.tsx";
-import {Home} from "./Home.tsx";
+
 import {useSelector} from "react-redux";
 import {selectIsAdmin} from "../../redux/slices/auth.ts";
 import {TutorControl} from "./TutorControl.tsx";
 import {UserControl} from "./UserControl.tsx";
+import {Settings} from "./Settings.tsx";
 
 export const PersonalAccount = () => {
     const isAdmin = useSelector(selectIsAdmin);
@@ -18,9 +19,11 @@ export const PersonalAccount = () => {
         menuItems = [
             {label: "Управление репетиторами", path: "/personalAccount/tutorApplication/:page"},
             {label: "Управление пользователями", path: "/personalAccount/users/:page"},
+            {label: "Настройки", path: "/personalAccount/me"},
         ]
         : menuItems = [
             {label: "Мои отзывы", path: "/personalAccount/reviews"},
+            {label: "Настройки", path: "/personalAccount/me"},
         ]
     return (
         <>
@@ -38,7 +41,7 @@ export const PersonalAccount = () => {
                 </Container>
             </InfoPanel>
             <Routes>
-                <Route path={'/'} element={<Home/>}/>
+                <Route path={'/me'} element={<Settings/>}/>
                 <Route path={'/reviews'} element={<MyReviews/>}/>
                 <Route path={'/tutorApplication/:page'} element={<TutorControl/>}/>
                 <Route path={'/users/:page'} element={<UserControl/>}/>

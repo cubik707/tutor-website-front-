@@ -27,12 +27,12 @@ export const Header = () => {
         ? isAdmin
             ? items = [
                 {label: "Репетиторы", path: "/tutors/choose/:page"},
-                {label: "Личный кабинет", path: "/personalAccount"},
+                {label: "Личный кабинет", path: "/personalAccount/me"},
             ]
             : items = [
                 {label: "Репетиторы", path: "/tutors/choose/:page"},
                 {label: "Стать репетитором", path: "/tutors/create"},
-                {label: "Личный кабинет", path: "/personalAccount"},
+                {label: "Личный кабинет", path: "/personalAccount/me"},
             ]
         : items = [
             {label: "Репетиторы", path: "/tutors/choose/:page"},

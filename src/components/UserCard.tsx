@@ -10,7 +10,7 @@ import {useAppDispatch} from "../redux/store.ts";
 
 type UserCardPropsType = {
     user: UserType
-    onClick: () => void
+    onClick?: () => void
 }
 
 export const UserCard = ({user, onClick}: UserCardPropsType) => {
@@ -42,7 +42,11 @@ export const UserCard = ({user, onClick}: UserCardPropsType) => {
                     </Text>
                 </FlexWrapper>
             </FlexWrapper>
-            <Button width={"300px"} title={'Удалить пользователя'} onClick={onClick}/>
+            {onClick
+                ? <Button width={"300px"} title={'Удалить пользователя'} onClick={onClick}/>
+                : ''
+            }
+
         </UserCardStyled>
     );
 };
