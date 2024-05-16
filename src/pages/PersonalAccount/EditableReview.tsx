@@ -44,7 +44,7 @@ export const EditableReview = ({review}: EditableReviewPropsType) => {
                     setRating(newValue);
                 }}
             />
-            <EditableSpan text={comment} changeText={changeCommentHandler}/>
+            <EditableSpan text={comment} changeText={changeCommentHandler} rows={2}/>
         </EditableReviewStyled>
     );
 };

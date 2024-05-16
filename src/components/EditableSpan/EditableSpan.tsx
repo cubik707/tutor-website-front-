@@ -4,9 +4,10 @@ import {TextField} from "@mui/material";
 type EditableSpanPropsType = {
     text:string
     changeText: (title:string) => void
+    rows: number
 };
 
-export const EditableSpan = ({text, changeText}: EditableSpanPropsType) => {
+export const EditableSpan = ({text, changeText, rows}: EditableSpanPropsType) => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [itemText, setItemText] = useState(text);
 
@@ -29,7 +30,7 @@ export const EditableSpan = ({text, changeText}: EditableSpanPropsType) => {
                 onChange={changeItemTitleHandler}
                 onBlur={offEditMode}
                 multiline
-                rows={2}
+                rows={rows}
             />
             : <span onDoubleClick={onEditMode}> {text} </span>
     );

@@ -15,7 +15,6 @@ import {PersonalAccount} from "./pages/PersonalAccount/PersonalAccount.tsx";
 import {BecomeTutor} from "./pages/BecomeTutor/BecomeTutor.tsx";
 
 
-
 function App() {
     const dispatch = useDispatch();
 

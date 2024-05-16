@@ -9,27 +9,8 @@ import {Pagination, PaginationItem} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store.ts";
 import {fetchRemoveTutorApplication, fetchTutorApplicationGET} from "../../redux/slices/tutorApplication.ts";
-import {fetchTutorsCreate} from "../../redux/slices/tutor.ts";
-// import {fetchRegister} from "../../redux/slices/auth.ts";
-//
-type TutorType = {
-    user: {
-        fullName: string;
-        avatarUrl: string;
-    }
-    subjects: string[]
-    pricePerHour: number
-    location?: string
-    rating: number
-    qualification?: string
-    teachingFormat: string
-    description?: string
-    resume?: {
-        experience: string
-        education: string
-    }
-    certificates?: string[]
-}
+import {fetchTutorsCreate, TutorType} from "../../redux/slices/tutor.ts";
+
 
 function Content() {
     const dispatch = useDispatch();
@@ -51,6 +32,11 @@ function Content() {
     // Если данные загружаются, показываем индикатор загрузки
     if (status === 'loading') {
         return <div>Loading...</div>;
+    }
+
+    // Если нет заявок, показываем сообщение
+    if (items.length === 0) {
+        return <div>Заявок нет</div>;
     }
 
     const startIndex = (parseInt(page ?? '1', 10) - 1) * tutorsApplicationPerPage;
@@ -135,4 +121,6 @@ export const TutorControl = () => {
 
 const TutorControlStyled = styled.section`
     padding: 65px 0;
+    min-height: 800px;
+    height: 100%;
 `

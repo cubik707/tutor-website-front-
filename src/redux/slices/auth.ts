@@ -28,6 +28,8 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
     return data;
 });
 
+
+
 interface AuthData {
     createdAt: string;
     email: string;

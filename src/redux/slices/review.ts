@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../axios.ts";
-import {fetchRemoveTutorApplication} from "./tutorApplication.ts";
 
 type UserType = {
     avatarUrl: string
